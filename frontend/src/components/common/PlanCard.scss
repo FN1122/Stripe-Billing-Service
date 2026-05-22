@@ -1,0 +1,114 @@
+.plan-card {
+  background: white;
+  border: 2px solid #e2e8f0;
+  border-radius: 8px;
+  padding: 24px;
+  transition: all 0.3s ease;
+
+  &:hover {
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+    border-color: #667eea;
+  }
+
+  &.selected {
+    border-color: #667eea;
+    background: #f7fafc;
+    box-shadow: 0 8px 24px rgba(102, 126, 234, 0.2);
+  }
+
+  .plan-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 12px;
+
+    .plan-name {
+      margin: 0;
+      font-size: 20px;
+      font-weight: 600;
+      color: #2d3748;
+    }
+
+    .plan-inactive {
+      background: #fed7d7;
+      color: #742a2a;
+      padding: 4px 8px;
+      border-radius: 4px;
+      font-size: 11px;
+      font-weight: 600;
+    }
+  }
+
+  .plan-description {
+    margin: 0 0 16px 0;
+    font-size: 13px;
+    color: #718096;
+  }
+
+  .plan-price {
+    margin-bottom: 12px;
+
+    .price-amount {
+      font-size: 32px;
+      font-weight: 700;
+      color: #2d3748;
+    }
+
+    .price-interval {
+      color: #718096;
+      font-size: 14px;
+      margin-left: 4px;
+    }
+  }
+
+  .plan-trial {
+    margin: 0 0 16px 0;
+    font-size: 13px;
+    color: #38a169;
+    font-weight: 500;
+  }
+
+  .plan-features {
+    list-style: none;
+    margin: 0 0 16px 0;
+    padding: 0;
+
+    li {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 13px;
+      color: #4a5568;
+      margin-bottom: 8px;
+
+      svg {
+        color: #38a169;
+        flex-shrink: 0;
+      }
+    }
+  }
+
+  .plan-stats {
+    padding: 12px;
+    background: #f7fafc;
+    border-radius: 6px;
+    margin-bottom: 16px;
+    text-align: center;
+
+    .stat {
+      font-size: 13px;
+      color: #718096;
+      font-weight: 500;
+    }
+  }
+
+  .plan-actions {
+    display: flex;
+    gap: 8px;
+
+    button {
+      flex: 1;
+      font-size: 13px;
+    }
+  }
+}

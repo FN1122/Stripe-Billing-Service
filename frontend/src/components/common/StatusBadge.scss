@@ -1,0 +1,33 @@
+.status-badge {
+  display: inline-block;
+  padding: 4px 12px;
+  border-radius: 12px;
+  font-size: 12px;
+  font-weight: 600;
+  text-transform: capitalize;
+
+  &.variant-success {
+    background: #c6f6d5;
+    color: #22543d;
+  }
+
+  &.variant-danger {
+    background: #fed7d7;
+    color: #742a2a;
+  }
+
+  &.variant-warning {
+    background: #feebc8;
+    color: #7c2d12;
+  }
+
+  &.variant-info {
+    background: #bee3f8;
+    color: #2c5282;
+  }
+
+  &.variant-default {
+    background: #edf2f7;
+    color: #2d3748;
+  }
+}

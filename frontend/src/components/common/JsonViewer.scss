@@ -1,0 +1,25 @@
+.json-viewer {
+  background: #2d3748;
+  border-radius: 8px;
+  padding: 16px;
+  overflow-x: auto;
+
+  .json-title {
+    margin: 0 0 12px 0;
+    color: #e2e8f0;
+    font-size: 13px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+
+  .json-content {
+    margin: 0;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 12px;
+    color: #68d391;
+    line-height: 1.5;
+    white-space: pre-wrap;
+    word-break: break-word;
+  }
+}

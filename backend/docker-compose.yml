@@ -1,0 +1,36 @@
+version: '3.8'
+
+services:
+  mssql:
+    image: mcr.microsoft.com/mssql/server:2022-latest
+    environment:
+      SA_PASSWORD: "StripeBillingP@ss123"
+      ACCEPT_EULA: "Y"
+    ports:
+      - "1433:1433"
+    healthcheck:
+      test: ["CMD-SHELL", "/opt/mssql-tools18/bin/sqlcmd -S localhost -U sa -P 'StripeBillingP@ss123' -Q 'SELECT 1' -C"]
+      interval: 10s
+      timeout: 3s
+      retries: 40
+    networks:
+      - stripe-billing-network
+
+  api:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "5000:80"
+    environment:
+      ConnectionStrings__DefaultConnection: "Server=mssql;Database=StripeBillingDb;User Id=sa;Password=StripeBillingP@ss123;Encrypt=true;TrustServerCertificate=true;"
+      ASPNETCORE_ENVIRONMENT: "Development"
+    depends_on:
+      mssql:
+        condition: service_healthy
+    networks:
+      - stripe-billing-network
+
+networks:
+  stripe-billing-network:
+    driver: bridge

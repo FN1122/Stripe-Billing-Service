@@ -1,0 +1,79 @@
+version: '3.8'
+
+services:
+  sqlserver:
+    image: mcr.microsoft.com/mssql/server:2022-latest
+    container_name: stripe-billing-db
+    environment:
+      - ACCEPT_EULA=Y
+      - MSSQL_SA_PASSWORD=StripeBilling@2024!
+      - MSSQL_PID=Express
+    ports:
+      - "1433:1433"
+    volumes:
+      - sqlserver-data:/var/opt/mssql
+    networks:
+      - stripe-billing-network
+    healthcheck:
+      test: /opt/mssql-tools18/bin/sqlcmd -S localhost -U sa -P "StripeBilling@2024!" -Q "SELECT 1" -C -b
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  api:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: stripe-billing-api
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ConnectionStrings__DefaultConnection=Server=sqlserver;Database=StripeBillingDb;User Id=sa;Password=StripeBilling@2024!;TrustServerCertificate=true;
+      - Jwt__SecretKey=StripeBillingJwtSecret2024SuperSecureKey!
+      - Jwt__Issuer=StripeBillingService
+      - Jwt__Audience=StripeBillingClients
+      - Jwt__AccessTokenExpiryMinutes=60
+      - Jwt__RefreshTokenExpiryDays=7
+      - Stripe__SecretKey=sk_test_your_stripe_secret_key
+      - Stripe__PublishableKey=pk_test_your_stripe_publishable_key
+      - Stripe__WebhookSecret=whsec_your_webhook_secret
+    ports:
+      - "5000:5000"
+    depends_on:
+      sqlserver:
+        condition: service_healthy
+    networks:
+      - stripe-billing-network
+    restart: unless-stopped
+
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    container_name: stripe-billing-frontend
+    ports:
+      - "3000:80"
+    depends_on:
+      - api
+    networks:
+      - stripe-billing-network
+    restart: unless-stopped
+
+  seq:
+    image: datalust/seq:latest
+    container_name: stripe-billing-seq
+    environment:
+      - ACCEPT_EULA=Y
+    ports:
+      - "5341:80"
+    volumes:
+      - seq-data:/data
+    networks:
+      - stripe-billing-network
+
+volumes:
+  sqlserver-data:
+  seq-data:
+
+networks:
+  stripe-billing-network:
+    driver: bridge
