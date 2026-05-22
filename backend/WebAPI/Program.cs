@@ -395,17 +395,17 @@ using (var scope = app.Services.CreateScope())
                 Name = "TechFlow Solutions",
                 Slug = "techflow",
                 Description = "SaaS platform for developer tools and API management",
-                PublicApiKey = "pk_test_51OxQrBCz3m7kX9aLpV2wN8dY",
-                PublicKey = "pk_test_51OxQrBCz3m7kX9aLpV2wN8dY",
+                PublicApiKey = "",
+                PublicKey = "",
                 SecretApiKeyHash = Convert.ToBase64String(
                     System.Security.Cryptography.SHA256.Create().ComputeHash(
-                        Encoding.UTF8.GetBytes("sk_test_51OxQrBCz3m7kX9aLpV2wN8dY"))),
+                        Encoding.UTF8.GetBytes(""))),
                 WebhookSigningSecret = "whsec_tfl_a3b8c2d9e4f7g1h6i5j0k",
                 WebhookCallbackUrl = "https://api.techflow.io/webhooks/stripe",
                 JwtSigningSecret = "jwt_techflow_secret_key_that_is_at_least_32_characters_long_2026",
                 StripeSecretKeyEnc = "",
-                StripePublishableKey = "pk_test_51OxQrBCz3m7kX9aLpV2wN8dY",
-                StripeWebhookSecret = "whsec_tfl_a3b8c2d9e4f7g1h6i5j0k",
+                StripePublishableKey = "",
+                StripeWebhookSecret = "",
                 Plan = "enterprise",
                 Settings = "{\"timezone\":\"America/New_York\",\"invoicePrefix\":\"TFL\",\"defaultCurrency\":\"usd\",\"paymentRetryDays\":7}",
                 Features = "[\"multi_currency\",\"usage_billing\",\"dunning\",\"stripe_connect\",\"custom_webhooks\",\"api_access\",\"sla_guarantee\"]",
@@ -422,17 +422,17 @@ using (var scope = app.Services.CreateScope())
                 Name = "Sunrise Dental Group",
                 Slug = "sunrise-dental",
                 Description = "Multi-location dental practice management and patient billing",
-                PublicApiKey = "pk_test_82GhTnRx5kL4mW7pQ9vJ3sYe",
-                PublicKey = "pk_test_82GhTnRx5kL4mW7pQ9vJ3sYe",
+                PublicApiKey = "",
+                PublicKey = "",
                 SecretApiKeyHash = Convert.ToBase64String(
                     System.Security.Cryptography.SHA256.Create().ComputeHash(
-                        Encoding.UTF8.GetBytes("sk_test_82GhTnRx5kL4mW7pQ9vJ3sYe"))),
+                        Encoding.UTF8.GetBytes(""))),
                 WebhookSigningSecret = "whsec_sdn_x7y2z8a3b4c9d0e5f1g6h",
                 WebhookCallbackUrl = "https://billing.sunrisedental.com/webhooks",
                 JwtSigningSecret = "jwt_sunrise_dental_secret_key_32_characters_minimum_2026",
                 StripeSecretKeyEnc = "",
-                StripePublishableKey = "pk_test_82GhTnRx5kL4mW7pQ9vJ3sYe",
-                StripeWebhookSecret = "whsec_sdn_x7y2z8a3b4c9d0e5f1g6h",
+                StripePublishableKey = "",
+                StripeWebhookSecret = "",
                 Plan = "professional",
                 Settings = "{\"timezone\":\"America/Chicago\",\"invoicePrefix\":\"SDG\",\"defaultCurrency\":\"usd\",\"paymentRetryDays\":5}",
                 Features = "[\"invoicing\",\"dunning\",\"email_templates\",\"tax_management\"]",
@@ -512,27 +512,27 @@ using (var scope = app.Services.CreateScope())
             db.ApiKeys.Add(new Core.Infrastructure.ApiKey
             {
                 Id = Guid.NewGuid(), TenantId = tenantId,
-                KeyHash = Convert.ToBase64String(System.Security.Cryptography.SHA256.Create().ComputeHash(Encoding.UTF8.GetBytes("pk_test_51OxQrBCz3m7kX9aLpV2wN8dY"))),
-                KeyEnc = "", KeyPrefix = "pk_test_51Ox", Name = "Production Public Key",
-                Description = "Primary public API key for TechFlow frontend integration", Environment = "test",
+                KeyHash = Convert.ToBase64String(System.Security.Cryptography.SHA256.Create().ComputeHash(Encoding.UTF8.GetBytes(""))),
+                KeyEnc = "", KeyPrefix = "pk__51Ox", Name = "Production Public Key",
+                Description = "Primary public API key for TechFlow frontend integration", Environment = "",
                 Permissions = "[\"payments\",\"subscriptions\",\"customers\",\"invoices\",\"checkout\"]",
                 RateLimitPerMinute = 120, TotalRequests = 48723, LastUsedAt = DateTime.UtcNow.AddMinutes(-15)
             });
             db.ApiKeys.Add(new Core.Infrastructure.ApiKey
             {
                 Id = Guid.NewGuid(), TenantId = tenantId,
-                KeyHash = Convert.ToBase64String(System.Security.Cryptography.SHA256.Create().ComputeHash(Encoding.UTF8.GetBytes("sk_test_51OxQrBCz3m7kX9aLpV2wN8dY"))),
-                KeyEnc = "", KeyPrefix = "sk_test_51Ox", Name = "Backend Secret Key",
-                Description = "Server-side secret key for backend API operations", Environment = "test",
+                KeyHash = Convert.ToBase64String(System.Security.Cryptography.SHA256.Create().ComputeHash(Encoding.UTF8.GetBytes(""))),
+                KeyEnc = "", KeyPrefix = "sk__51Ox", Name = "Backend Secret Key",
+                Description = "Server-side secret key for backend API operations", Environment = "",
                 Permissions = "[\"payments\",\"subscriptions\",\"customers\",\"invoices\",\"refunds\",\"webhooks\",\"analytics\"]",
                 RateLimitPerMinute = 200, TotalRequests = 156892, LastUsedAt = DateTime.UtcNow.AddMinutes(-3)
             });
             db.ApiKeys.Add(new Core.Infrastructure.ApiKey
             {
                 Id = Guid.NewGuid(), TenantId = tenant2Id,
-                KeyHash = Convert.ToBase64String(System.Security.Cryptography.SHA256.Create().ComputeHash(Encoding.UTF8.GetBytes("pk_test_82GhTnRx5kL4mW7pQ9vJ3sYe"))),
-                KeyEnc = "", KeyPrefix = "pk_test_82Gh", Name = "Sunrise Dental Public Key",
-                Description = "Public API key for patient portal", Environment = "test",
+                KeyHash = Convert.ToBase64String(System.Security.Cryptography.SHA256.Create().ComputeHash(Encoding.UTF8.GetBytes(""))),
+                KeyEnc = "", KeyPrefix = "pk__82Gh", Name = "Sunrise Dental Public Key",
+                Description = "Public API key for patient portal", Environment = "",
                 Permissions = "[\"payments\",\"customers\",\"invoices\"]",
                 RateLimitPerMinute = 60, TotalRequests = 12450, LastUsedAt = DateTime.UtcNow.AddHours(-1)
             });
